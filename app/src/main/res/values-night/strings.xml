@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DeePest</string>
     <string name="etPassword_hint">Type your password</string>
     <string name="etEmail_hint">Type your email</string>
     <string name="etName_hint">Type your name</string>
