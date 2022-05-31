@@ -11,4 +11,6 @@
     <string name="old_user">Old user?</string>
     <string name="new_user">New user?</string>
     <string name="logo_deepest">Logo Deepest</string>
+    <string name="logout">Logout</string>
+    <string name="register_error">Register Error</string>
 </resources>
