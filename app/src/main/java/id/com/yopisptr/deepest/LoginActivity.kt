@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import id.com.yopisptr.deepest.databinding.ActivityLoginBinding
 import id.com.yopisptr.deepest.modelfactory.ModelFactoryAuth
 import id.com.yopisptr.deepest.viewmodel.ViewModelLogin
-import kotlin.Result
+import id.com.yopisptr.deepest.Result
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar>.hide()
+        supportActionBar?.hide()
 
         binding.btnTvRegister.setOnClickListener {
             val registerIntent = Intent(this, RegisterActivity::class.java)

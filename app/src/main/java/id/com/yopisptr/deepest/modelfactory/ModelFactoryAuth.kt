@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import id.com.yopisptr.deepest.repository.RepositoryUser
 import id.com.yopisptr.deepest.utility.InjectUser
+import id.com.yopisptr.deepest.viewmodel.ViewModelLogin
 import id.com.yopisptr.deepest.viewmodel.ViewModelRegister
 
 class ModelFactoryAuth(private val repositoryUser: RepositoryUser): ViewModelProvider.NewInstanceFactory() {
@@ -13,6 +14,9 @@ class ModelFactoryAuth(private val repositoryUser: RepositoryUser): ViewModelPro
         return when {
             modelClass.isAssignableFrom(ViewModelRegister::class.java) -> {
                 ViewModelRegister(repositoryUser) as T
+            }
+            modelClass.isAssignableFrom(ViewModelLogin::class.java) -> {
+                ViewModelLogin(repositoryUser) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

@@ -10,12 +10,11 @@ import androidx.lifecycle.liveData
 import id.com.yopisptr.deepest.response.ResponseLogin
 import id.com.yopisptr.deepest.response.ResponseRegister
 import id.com.yopisptr.deepest.retrofit.ApiService
+import id.com.yopisptr.deepest.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class RepositoryUser private constructor(private val dataStore: DataStore<Preferences>,
-                                         private val apiService: ApiService
-){
+class RepositoryUser private constructor(private val dataStore: DataStore<Preferences>,private val apiService: ApiService){
     fun register(email: String, password: String):LiveData<Result<ResponseRegister>> = liveData{
         try {
             val result = apiService.register(email, password)
