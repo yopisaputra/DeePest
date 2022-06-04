@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import id.com.yopisptr.deepest.databinding.ActivityRegisterBinding
+import id.com.yopisptr.deepest.modelfactory.ModelFactoryAuth
 import id.com.yopisptr.deepest.viewmodel.ViewModelRegister
-import kotlin.Result
+import id.com.yopisptr.deepest.Result.Error
+import id.com.yopisptr.deepest.Result.Success
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -17,10 +20,13 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        supportActionBar?.title = "Register"
+
+        val factory: ModelFactoryAuth = ModelFactoryAuth.getInstance(this)
+        viewModelRegister = ViewModelProvider(this, factory)[ViewModelRegister::class.java]
 
         binding.btnTvRegister.setOnClickListener {
-            val loginIntent = Intent(this, MainActivity::class.java)
+            val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
         }
 
@@ -33,18 +39,16 @@ class RegisterActivity : AppCompatActivity() {
         val password = binding.etPassword.text.toString().trim()
         when {
             email.isEmpty() -> {
-                binding.etEmail.error =
-                    resources.getString(R.string.message_validation, "email")
+                binding.etEmail.error = resources.getString(R.string.register_error)
             }
             password.isEmpty() -> {
-                binding.etPassword.error =
-                    resources.getString(R.string.message_validation, "password")
+                binding.etEmail.error = resources.getString(R.string.register_error)
             }
             else -> {
                 viewModelRegister.register(email, password).observe(this) { result ->
                     if (result != null) {
                         when (result) {
-                            is Result.Success -> {
+                            is Success -> {
                                 val user = result.data
                                 if (user.error) {
                                     Toast.makeText(
@@ -69,9 +73,9 @@ class RegisterActivity : AppCompatActivity() {
                                     }
                                 }
                             }
-                            is Result.Error -> {
+                            is Error -> {
                                 Toast.makeText(
-                                    this@RegisterActivity,
+                                    this,
                                     resources.getString(R.string.register_error),
                                     Toast.LENGTH_SHORT
                                 ).show()

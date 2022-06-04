@@ -8,7 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import id.com.yopisptr.deepest.databinding.ActivityLoginBinding
 import id.com.yopisptr.deepest.modelfactory.ModelFactoryAuth
 import id.com.yopisptr.deepest.viewmodel.ViewModelLogin
-import id.com.yopisptr.deepest.Result
+import id.com.yopisptr.deepest.Result.Error
+import id.com.yopisptr.deepest.Result.Success
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                 viewModelLogin.login(email, password).observe(this){ result ->
                     if (result != null) {
                         when (result) {
-                            is Result.Success -> {
+                            is Success -> {
                                 val user = result.data
                                 if (user.error) {
                                     Toast.makeText(
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                                     viewModelLogin.setToken(token, true)
                                 }
                             }
-                            is Result.Error -> {
+                            is Error -> {
                                 Toast.makeText(
                                     this,
                                     resources.getString(R.string.login_error),
