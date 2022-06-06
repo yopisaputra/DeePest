@@ -4,86 +4,59 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
-import id.com.yopisptr.deepest.databinding.ActivityRegisterBinding
-import id.com.yopisptr.deepest.modelfactory.ModelFactoryAuth
-import id.com.yopisptr.deepest.viewmodel.ViewModelRegister
-import id.com.yopisptr.deepest.Result.Error
-import id.com.yopisptr.deepest.Result.Success
+import id.com.yopisptr.deepest.Retrofit.INodeJS
+import id.com.yopisptr.deepest.Retrofit.RetrofitClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
-    private lateinit var viewModelRegister: ViewModelRegister
+
+    lateinit var myAPI: INodeJS
+    var compositeDisposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_register)
 
-        supportActionBar?.title = "Register"
+        //Init API
+        var retrofit = RetrofitClient.instance
+        myAPI = retrofit.create(INodeJS::class.java)
 
-        val factory: ModelFactoryAuth = ModelFactoryAuth.getInstance(this)
-        viewModelRegister = ViewModelProvider(this, factory)[ViewModelRegister::class.java]
-
-        binding.btnTvRegister.setOnClickListener {
-            val loginIntent = Intent(this, LoginActivity::class.java)
-            startActivity(loginIntent)
+        btnTvToLogin.setOnClickListener {
+            val toLoginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(toLoginIntent)
         }
 
-        binding.btnRegister.setOnClickListener{
-            register()
+        btnRegister.setOnClickListener {
+            register(etEmail.text.toString(),etPassword.text.toString())
         }
+
+
     }
-    private fun register() {
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        when {
-            email.isEmpty() -> {
-                binding.etEmail.error = resources.getString(R.string.register_error)
-            }
-            password.isEmpty() -> {
-                binding.etEmail.error = resources.getString(R.string.register_error)
-            }
-            else -> {
-                viewModelRegister.register(email, password).observe(this) { result ->
-                    if (result != null) {
-                        when (result) {
-                            is Success -> {
-                                val user = result.data
-                                if (user.error) {
-                                    Toast.makeText(
-                                        this@RegisterActivity,
-                                        user.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    Toast.makeText(
-                                        this@RegisterActivity,
-                                        resources.getString(R.string.register_error),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    AlertDialog.Builder(this@RegisterActivity).apply {
-                                        setTitle("Yeah!")
-                                        setMessage("Your account successfully created!")
-                                        setPositiveButton("Next") { _, _ ->
-                                            finish()
-                                        }
-                                        create()
-                                        show()
-                                    }
-                                }
-                            }
-                            is Error -> {
-                                Toast.makeText(
-                                    this,
-                                    resources.getString(R.string.register_error),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
-                }
-            }
-        }
+
+    private fun register(email: String, password: String) {
+
+        compositeDisposable.add(myAPI.registerUser(email,password)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ message ->
+                Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
+            })
+
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
+
+    }
+
+    override fun onStop() {
+        compositeDisposable.clear()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
     }
 }
