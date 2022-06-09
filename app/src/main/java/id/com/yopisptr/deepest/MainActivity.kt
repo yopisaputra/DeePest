@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun uploadImage(){
         Toast.makeText(this, "Fitur Belum Bisa", Toast.LENGTH_SHORT).show()
+        //Upload Image belum bisa
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
