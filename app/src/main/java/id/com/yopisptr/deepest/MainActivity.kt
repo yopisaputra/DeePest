@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import id.com.yopisptr.deepest.databinding.ActivityMainBinding
 import id.com.yopisptr.deepest.utility.rotateBitmap
+import id.com.yopisptr.deepest.utility.uriToFile
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -71,7 +73,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGallery(){
-        Toast.makeText(this, "Fitur Belum Bisa", Toast.LENGTH_SHORT).show()
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedImg, this@MainActivity)
+            binding.previewImageView.setImageURI(selectedImg)
+        }
     }
 
     private fun uploadImage(){
