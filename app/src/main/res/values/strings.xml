@@ -15,4 +15,11 @@
     <string name="login_error">Login Error</string>
     <string name="logout">Logout</string>
     <string name="register_error">Register Error</string>
+    <string name="resultNamaHama1">Ulat</string>
+    <string name="resultNamaHama2">Keong</string>
+    <string name="resultNamaHama3">Telur Keong</string>
+    <string name="resultMitigasiHama1">Berantas Ulat</string>
+    <string name="resultMitigasiHama2">Berantas Keong</string>
+    <string name="resultMitigasiHama3">Berantas Telur Keong</string>
+
 </resources>
