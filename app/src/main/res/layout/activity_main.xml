@@ -81,13 +81,17 @@
         android:paddingStart="20dp"
         android:paddingTop="24dp"
         tools:ignore="RtlSymmetry" />
-    <TextView
-        android:id="@+id/tvResultMitigasiHama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/resultModel"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="10dp"
-        tools:ignore="RtlSymmetry" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvResultMitigasiHama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resultModel"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="10dp"
+            tools:ignore="RtlSymmetry" />
+    </ScrollView>
 </LinearLayout>
