@@ -85,9 +85,11 @@
             android:id="@+id/btnTvToRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp"
+            android:text="@string/register"
+            android:textColor="@color/purple_700"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button
