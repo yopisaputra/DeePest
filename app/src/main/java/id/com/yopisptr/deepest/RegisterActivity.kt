@@ -32,8 +32,6 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             register(etEmail.text.toString(),etPassword.text.toString())
         }
-
-
     }
 
     private fun register(email: String, password: String) {
@@ -44,10 +42,8 @@ class RegisterActivity : AppCompatActivity() {
             .subscribe{ message ->
                 Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
             })
-
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
-
     }
 
     override fun onStop() {
