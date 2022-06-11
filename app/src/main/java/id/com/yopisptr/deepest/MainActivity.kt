@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -17,17 +16,26 @@ import id.com.yopisptr.deepest.utility.uriToFile
 import java.io.File
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.graphics.*
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.exifinterface.media.ExifInterface
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.switchmaterial.SwitchMaterial
+import id.com.yopisptr.deepest.theme.SettingPreference
+import id.com.yopisptr.deepest.theme.ThemeViewModel
+import id.com.yopisptr.deepest.theme.ThemeViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.tensorflow.lite.support.image.TensorImage
@@ -39,12 +47,14 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var currentPhotoPath: String
     private lateinit var myFile: File
     private lateinit var stringResult: String
+    private lateinit var switchTheme : SwitchMaterial
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -94,6 +104,26 @@ class MainActivity : AppCompatActivity() {
         binding.btnCamera.setOnClickListener { startCameraX() }
         binding.btnGaleri.setOnClickListener { startGallery() }
         binding.btnUpload.setOnClickListener { uploadImage() }
+
+        val switchTheme = findViewById<SwitchMaterial>(R.id.switchMode)
+
+        val pref = SettingPreference.getInstance(dataStore)
+        val themeViewModel = ViewModelProvider(this, ThemeViewModelFactory(pref)).get(ThemeViewModel::class.java)
+
+        themeViewModel.getThemeSettings().observe(this,
+            { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    switchTheme.isChecked = true
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    switchTheme.isChecked = false
+                }
+            })
+
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            themeViewModel.saveThemeSetting(isChecked)
+        }
     }
 
     private fun startCameraX(){
