@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var currentPhotoPath: String
     private lateinit var myFile: File
+    private lateinit var stringResult: String
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -119,9 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(){
-        Toast.makeText(this, "Fitur Belum Bisa", Toast.LENGTH_SHORT).show()
         setViewAndDetect(BitmapFactory.decodeFile(myFile.absolutePath))
-        //Upload Image belum bisa
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
@@ -167,14 +166,28 @@ class MainActivity : AppCompatActivity() {
             // Get the top-1 category and craft the display text
             val category = it.categories.first()
             val text = "${category.label}, ${category.score.times(100).toInt()}%"
+            stringResult = category.label
 
             // Create a data object to display the detection result
             DetectionResult(it.boundingBox, text)
+
         }
         // Draw the detection result on the bitmap and show it.
         val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
         runOnUiThread {
             binding.previewImageView.setImageBitmap(imgWithResult)
+            if ( stringResult == "Telor"){
+                binding.tvResultNamaHama.setText(R.string.categories3)
+                binding.tvResultMitigasiHama.setText(R.string.resultMitigasi3)
+            }else if ( stringResult ==  "Ulat"){
+                binding.tvResultNamaHama.setText(R.string.categories1)
+                binding.tvResultMitigasiHama.setText(R.string.resultMitigasi1)
+            }else if (stringResult == "Keong"){
+                binding.tvResultNamaHama.setText(R.string.categories2)
+                binding.tvResultMitigasiHama.setText(R.string.resultMitigasi2)
+            }else{
+                Toast.makeText(this@MainActivity, "ERROR", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

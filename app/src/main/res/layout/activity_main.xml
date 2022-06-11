@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Upload Gambar"
+        android:text="@string/upload_gambar"
         android:textSize="24sp" />
 
     <ImageView
@@ -20,7 +20,8 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/ic_baseline_image" />
+        app:srcCompat="@drawable/ic_baseline_image"
+        android:contentDescription="@string/previewImageViewContentDesc" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,7 +35,8 @@
             android:layout_gravity="center"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
-            android:text="Camera" />
+            android:text="@string/camera"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/btnGaleri"
@@ -42,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_weight="1"
-            android:text="Galeri" />
+            android:text="@string/galeri"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <Button
@@ -52,7 +55,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:text="Upload" />
+        android:text="@string/upload" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,26 +63,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Hama : "
+            android:text="@string/nama_hama"
             android:paddingStart="20dp"
-            android:paddingTop="24dp"/>
+            android:paddingTop="24dp"
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/tvResultNamaHama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Result"/>
+            android:paddingStart="5dp"
+            android:text="@string/resultModel"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mitigasi"
+        android:text="@string/mitigasi"
         android:paddingStart="20dp"
-        android:paddingTop="24dp"/>
+        android:paddingTop="24dp"
+        tools:ignore="RtlSymmetry" />
     <TextView
         android:id="@+id/tvResultMitigasiHama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result Mitigasi"
+        android:text="@string/resultModel"
         android:paddingStart="20dp"
-        android:paddingTop="24dp"/>
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        tools:ignore="RtlSymmetry" />
 </LinearLayout>

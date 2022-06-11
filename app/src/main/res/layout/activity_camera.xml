@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_capture"
-        android:contentDescription="Tombol Untuk Ambil Gambar" />
+        android:contentDescription="@string/btnCaptureImageContentDesc" />
 
     <ImageView
         android:id="@+id/btnSwitchCamera"
@@ -29,6 +29,6 @@
         app:layout_constraintEnd_toEndOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_switch_camera"
-        android:contentDescription="Tombol Untuk Switch Camera" />
+        android:contentDescription="@string/btnSwitchCameraContentDesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

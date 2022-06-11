@@ -13,4 +13,42 @@
     <string name="logo_deepest">Logo Deepest</string>
     <string name="logout">Logout</string>
     <string name="register_error">Register Error</string>
+    <string name="resultModel">Belum Ada</string>
+    <string name="mitigasi">Mitigasi</string>
+    <string name="nama_hama">Nama Hama :</string>
+    <string name="upload">Upload</string>
+    <string name="galeri">Galeri</string>
+    <string name="camera">Camera</string>
+    <string name="upload_gambar">Upload Gambar</string>
+    <string name="previewImageViewContentDesc">Gambar Untuk Deteksi</string>
+    <string name="btnCaptureImageContentDesc">Tombol Untuk Ambil Gambar</string>
+    <string name="btnSwitchCameraContentDesc">Tombol Untuk Switch Camera</string>
+
+    <string name="categories1">Ulat Grayak</string>
+    <string name="categories2">Keong</string>
+    <string name="categories3">Telur Keong</string>
+    <string name="resultMitigasi1">
+        - Menggenangi tanaman padi untuk menekan populasi ulat. \n
+        - Pembibitan jauh dan bebas dari gulma. \n
+        - Mengendalikan gulma di luar dan di dalam sawah. \n
+        - Mempertahankan musuh alami ulat grayak (misalnya tawon dan laba-laba). \n
+        - Tidak menggunakan insektisida. \n
+        - Penuhi parit dengan abu dan tampatkan ranting disekeliling sawah. \n
+        - Menggunakan insektisida berbahan aktif etofenproks (contoh: Trebon) atau bahan aktif MIPC (contoh: Mipcin, Sidacin) sebagai pilihan terakhir untuk menghilangkan ulat grayak.
+    </string>
+    <string name="resultMitigasi2">
+        - Tanam bibit lebih tua pada daerah yang banyak keong mas. \n
+        - Tidak melakukan penggenangan sampai 7-10 HST(Hari Setelah Tanam) agar menekan keaktifan keong. \n
+        - Memasang saringan pada saluran masuk ke persawahan untuk menghindari masuknya keong mas dari saluran irigasi. \n
+        - Menggunakan pupuk dasar (terutama urea) sehari sebelum tanam. \n
+        - Pemberian saponin dengan dosis 20 kg/ha. \n
+        - Mengumpulkan keong mas beserta telur nya dan kemudian dimusnahkan. \n
+        - Membuat parit kecil atau saluran air untuk memudahkan mengambil keong mas, dapat memberikan daun pepaya sebagai umpan untuk mengumpulkan keong mas didalam parit. \n
+        - Mengembalakan 200 bebek/ha di lahan sawah dua hari sebelum tanam selama 8 jam/hari.
+    </string>
+    <string name="resultMitigasi3">
+        - Mengumpulkan keong mas beserta telur nya dan kemudian dimusnahkan. \n
+        - Memasang ajir untuk tempat berkumpulnya kelompok telur, kemudian kelompok telur tersebut dimusnahkan. \n
+        - Melakukan pemasangan tongkat kayu pada area padi sehingga keong akan bertelur pada tongkat kayu bukan di tanaman padi. \n
+    </string>
 </resources>
