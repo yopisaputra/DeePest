@@ -46,13 +46,13 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(loginIntent)
     }
 
-    override fun onStop() {
-        compositeDisposable.clear()
-        super.onStop()
-    }
-
     override fun onDestroy() {
         compositeDisposable.clear()
         super.onDestroy()
+    }
+
+    override fun onStop() {
+        compositeDisposable.clear()
+        super.onStop()
     }
 }
